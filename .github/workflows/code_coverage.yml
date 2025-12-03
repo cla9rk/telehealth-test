@@ -1,0 +1,16 @@
+name: Code Coverage
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  code_coverage:
+    uses: cchmc/.swe-documentation/.github/workflows/code_coverage.yml@main
+    #secrets: # if you use a nuget package from a private repo, you need to supply these secrets
+    #  nuget_user: ${{ secrets.REGISTRY_USER }}
+    #  nuget_token: ${{ secrets.PACKAGE_TOKEN }}
+    with:
+      use_nuget_ci: false
+      #nugetcfg_path: '' # if you use a nuget package from a private repo, you need to supply this path with a trailing slash (org.cchmc.project.core/)

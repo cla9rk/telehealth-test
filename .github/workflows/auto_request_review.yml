@@ -1,0 +1,15 @@
+name: Auto Request Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+  pull_request_review:
+    types: [submitted]
+  issue_comment:
+    types: [created]
+
+jobs:
+  auto-request-review:
+    if: ${{ github.event.issue.pull_request || github.event.review.state == 'approved' || github.event.action == 'opened' || github.event.action == 'ready_for_review'|| github.event.action == 'reopened' }}
+    uses: cchmc/.swe-documentation/.github/workflows/auto_request_review.yml@main
+    secrets: inherit

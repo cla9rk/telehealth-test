@@ -1,0 +1,13 @@
+name: Dependency Check
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  depcheck:
+    if: ${{ github.triggering_actor != 'dependabot[bot]' }} # don't run if dependabot initiated the PR
+    uses: cchmc/.swe-documentation/.github/workflows/depcheck.yml@main
+    secrets: inherit
+    with:
+      directory: '{{ cookiecutter.project_name }}.web'

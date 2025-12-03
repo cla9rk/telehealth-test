@@ -1,0 +1,12 @@
+# NOTE: To use this workflow in your repo, you need a javascript project
+name: Danger JS
+
+on: [pull_request]
+
+jobs:
+  DangerJS:
+    if: ${{ github.triggering_actor != 'dependabot[bot]' }} # don't run if dependabot initiated the PR
+    uses: cchmc/.swe-documentation/.github/workflows/danger.yml@main
+    with:
+      working_web_directory: '{{ cookiecutter.project_name }}.web'
+    secrets: inherit

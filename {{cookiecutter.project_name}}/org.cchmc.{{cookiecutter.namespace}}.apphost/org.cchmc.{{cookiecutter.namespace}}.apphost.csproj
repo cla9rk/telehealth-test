@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.System" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0-preview.4.25258.110">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Compliance.Redaction" Version="9.7.0" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\org.cchmc.{{cookiecutter.namespace}}.auth\org.cchmc.{{cookiecutter.namespace}}.auth.csproj" />
+    <ProjectReference Include="..\org.cchmc.{{cookiecutter.namespace}}.data\org.cchmc.{{cookiecutter.namespace}}.data.csproj" />
+    <ProjectReference Include="..\org.cchmc.{{cookiecutter.namespace}}.endpoints\org.cchmc.{{cookiecutter.namespace}}.endpoints.csproj" />
+    <ProjectReference Include="..\org.cchmc.{{cookiecutter.namespace}}.models\org.cchmc.{{cookiecutter.namespace}}.models.csproj" />
+  </ItemGroup>
+
+</Project>

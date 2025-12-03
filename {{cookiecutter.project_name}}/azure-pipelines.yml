@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+      - main
+      - release/*
+      
+resources:
+    repositories:
+        - repository: cchmctemplates
+          type: git
+          name: CCHMC.Core/CCHMC.BuildTemplates
+variables:
+    buildConfiguration: release
+    webSubDir: 'org.cchmc.{{cookiecutter.namespace}}.web' # TODO: this needs to get removed if there is no web project specified
+    apiSubDir: 'org.cchmc.{{cookiecutter.namespace}}.apphost'
+jobs:
+    - job: build
+      displayName: 'Building Application API and SPA'
+      pool:
+        ${{ '{{' }} if eq(variables['Build.RequestedFor'], 'dependabot[bot]') }}:
+          name: OnPrem_AppDev
+        ${{ '{{' }} else }}:
+          vmImage: ubuntu-latest
+      steps:
+        - {template: send-readme-servicenow.yml@cchmctemplates, parameters: { projectName: "{{cookiecutter.project_name}}" }}
+        - {task: Npm@1, displayName: 'npm ci', inputs: {command: custom, workingDir: $(webSubDir), verbose: false, customCommand: 'ci'}}
+        - {task: Npm@1, displayName: 'build', inputs: {command: custom, workingDir: $(webSubDir), verbose: false, customCommand: 'run build'}}
+        
+        # Build API
+        - task: UseDotNet@2
+          displayName: "Use .NET 10.x"
+          inputs:
+            version: '10.x'
+            packageType: sdk
+        - script: dotnet build --configuration $(buildConfiguration)
+          displayName: 'dotnet build $(buildConfiguration)'
+
+        - task: DotNetCoreCLI@2
+          displayName: "Publish App (zip)"
+          inputs:
+            command: publish
+            publishWebProjects: True
+            arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+            zipAfterPublish: True
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Uploading Artifacts'
+          inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)'

@@ -1,0 +1,9 @@
+{
+	// These are just examples, this would generate org.cchmc.billing.patientrefunds. You also need to delete this comment!
+	"owning_department": "Billing",
+	"project_name": "Patient Refunds",
+
+	"project_nospace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
+	"project_camelcase": "{{ cookiecutter.project_name|replace(' ', '') }}",
+	"namespace": "{{ cookiecutter.owning_department|lower|replace(' ', '') }}.{{ cookiecutter.project_name|lower|replace(' ', '') }}"
+}

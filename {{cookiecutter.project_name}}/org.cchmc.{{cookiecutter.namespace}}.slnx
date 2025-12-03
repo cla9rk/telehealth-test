@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="azure-pipelines.yml" />
+    <File Path="changelog.md" />
+    <File Path="CodeCoverage.runsettings" />
+    <File Path="CODEOWNERS" />
+    <File Path="Coverlet.runsettings" />
+    <File Path="projectstructure.drawio.png" />
+    <File Path="pull_request_template.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.apphost/org.cchmc.{{cookiecutter.namespace}}.apphost.csproj" />
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.auth/org.cchmc.{{cookiecutter.namespace}}.auth.csproj" />
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.data/org.cchmc.{{cookiecutter.namespace}}.data.csproj" />
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.endpoints/org.cchmc.{{cookiecutter.namespace}}.endpoints.csproj" />
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.models/org.cchmc.{{cookiecutter.namespace}}.models.csproj" />
+  <Project Path="org.cchmc.{{cookiecutter.namespace}}.unittests/org.cchmc.{{cookiecutter.namespace}}.unittests.csproj" />
+</Solution>
